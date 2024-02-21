@@ -4,7 +4,7 @@ import config from "./config.json";
 
 // const url = `http://${config.server_host}:${config.server_port}/`;
 
-const url = `https://shades-challenge.vercel.app/`;
+const url = `https://shades-challenge.vercel.app`;
 
 // const getOneTest = async () => {
 //   try {
@@ -53,7 +53,7 @@ const getOneTest = async () => {
 };
 
 const getById = async (id) => {
-  const res = await axios.get(`${url}${id}`);
+  const res = await axios.get(`${url}/${id}`);
   const { data } = res;
   if (data.length === 0) {
     return ({});
@@ -63,7 +63,7 @@ const getById = async (id) => {
 }
 
 const getBySearchTerm = async (searchTerm) => {
-  const res = await axios.get(`${url}search/${searchTerm}`);
+  const res = await axios.get(`${url}/search/${searchTerm}`);
   const { data } = res;
   if (data.length === 0) {
     return ({});

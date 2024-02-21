@@ -8,6 +8,7 @@ function Shade({ data }) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -18,6 +19,15 @@ function Shade({ data }) {
       const cappedSummary = rawSummary.split(' ').slice(0, wordLimit).join(' ') + '...';
       setSummary(cappedSummary);
       setImage(data.image);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      getLike(data._id).then((res) => {
+        console.log(res.data);
+        setLiked(res.data || false);
+      });
     }
   }, [data]);
 
@@ -36,7 +46,7 @@ function Shade({ data }) {
         <Title>{title}</Title>
         <Text style={{ fontSize: 12 }}>{summary}</Text>
       </Stack>
-      <Switch size="xl" onLabel="LIKED" onChange={handleSwitch} />
+      <Switch size="xl" value={liked} onLabel="LIKED" onChange={handleSwitch} />
     </Group>
   );
 }
