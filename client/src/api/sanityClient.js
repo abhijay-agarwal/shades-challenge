@@ -50,7 +50,7 @@ const getOneTest = async () => {
 };
 
 const getById = async (id) => {
-  const res = await axios.get(`${url}/${id}`);
+  const res = await axios.get(`${url}/id/${id}`);
   const { data } = res;
   if (data.length === 0) {
     return ({});
