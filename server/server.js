@@ -10,7 +10,7 @@ app.use(cors({
 }));
 
 
-app.get('/', sanity.getOneTest);
+app.get('/', res.json("Hello"));
 app.get('/count', sanity.getAllTiles);
 app.get('/:id', sanity.getById);
 app.get('/search/:searchTerm', sanity.getBySearchTerm);
