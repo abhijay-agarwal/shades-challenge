@@ -31,7 +31,7 @@ function LikedShades() {
           {likedShades.length > 0 ? (
             likedShades.map((result) => (
               <>
-                <Shade key={result._id} data={result} />
+                <Shade key={result._id} id={result._id} />
                 <Divider />
               </>
             ))

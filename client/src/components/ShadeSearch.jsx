@@ -41,7 +41,7 @@ function ShadeSearch() {
           {searchResults.length > 0 ? (
             searchResults.map((result) => (
               <>
-                <Shade key={result._id} data={result._id} />
+                <Shade key={result._id} id={result._id} />
                 <Divider />
               </>
             ))
