@@ -23,7 +23,8 @@ function Shade({ data }) {
 
   const handleSwitch = async (e) => {
     console.log(data._id);
-    await setLike(data._id, e.target.value).then((res) => {
+    console.log(e.target.checked);
+    await setLike(data._id, e.target.checked).then((res) => {
       console.log(res)
     });
   }
