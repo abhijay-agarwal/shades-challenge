@@ -3,10 +3,8 @@ import cors from "cors";
 import { getAllTiles, getById, getBySearchTerm } from "./sanity.js";
 import { setLike, getLike } from "./vercel.js";
 
-const json = require("./config.json");
-
-const server_port = json.server_port;
-const server_host = json.server_host;
+const server_port = 8080;
+const server_host = "localhost";
 
 const app = express();
 app.use(
