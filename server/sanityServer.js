@@ -26,7 +26,7 @@ const getOneTest = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   try {
-    await client.fetch(`*[_id == "${id}"]{
+    await client.fetch(`*[_id == "${id}" && developing == false]{
       _id,
       title,
       summary,
@@ -60,6 +60,8 @@ const getBySearchTerm = async (req, res) => {
     const query =
       `*[
         _type == "tile" &&
+        !summary match "lorem*" &&
+        devloping == false &&
         !(_id in path("drafts.*")) &&
         status == "published" &&
         (title match "${searchText}*" || labels[].value match "${searchText}")
@@ -86,9 +88,9 @@ const getByAbstractSearchTerm = async (req, res) => {
     const { searchText } = req.params;
     const keywords = searchText.split(" ");
 
-    const filters = keywords.map(keyword => `(title match "${keyword}*" || labels[].value match "${keyword}")`).join(" || ");
+    const filters = keywords.map(keyword => `(title match "${keyword}*"  || labels[].value match "${keyword}")`).join(" || ");
 
-    const query = `*[_type == "article" && (${filters})]`;
+    const query = `*[_type == "tile" && !summary match "lorem*" &&  developing == false &&  (${filters})]`;
 
     const data = await client.fetch(query);
     res.json(data);
