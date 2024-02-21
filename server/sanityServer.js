@@ -89,9 +89,8 @@ const getByAbstractSearchTerm = async (req, res) => {
     const filters = keywords.map(keyword => `(title match "${keyword}*"  || labels[].value match "${keyword}")`).join(" || ");
 
     const query = `
-      *[_type == "tile" && 
-      !summary match "lorem*" && 
-      developing == false && 
+      *[_type == "tile" &&
+      developing == false &&
       !(_id in path("drafts.*")) &&
       status == "published" &&
       (${filters})]
