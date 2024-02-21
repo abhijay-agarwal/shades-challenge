@@ -62,7 +62,7 @@ const getStrictestMatches = async (req, res) => {
     const { queryString } = req.params;
     const keywords = queryString.split(" ").filter(word => !STOPWORDS.includes(word.toLowerCase()));
 
-    const titleFilters = keywords.map(keyword => `(title match "${keyword}"`).join(" || ");
+    const titleFilters = keywords.map(keyword => `title match "${keyword}"`).join(" || ");
     const labelFilters = keywords.map(keyword => `labels[].value match "${keyword}*"`).join(" || ");
     const summaryFilters = keywords.map(keyword => `summary match "${keyword}*"`).join(" || ");
 
