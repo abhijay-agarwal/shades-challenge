@@ -113,7 +113,4 @@ const getByAbstractSearchTerm = async (req, res) => {
   }
 }
 
-
-console.log('Sanity client created')
-
 export { client, getOneTest, getById, getAllTiles, getByTitleText, getByAbstractSearchTerm };

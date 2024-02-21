@@ -93,4 +93,4 @@ const getBySearchText = async (searchTerm) => {
   }
 }
 
-export { getOneTest, getById, getBySearchText };
+export { getOneTest, getById, getByTitleText, getBySearchText };
