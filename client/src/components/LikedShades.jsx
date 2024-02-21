@@ -39,7 +39,7 @@ function LikedShades() {
                 </>
               ))
             ) : (
-              <Text>No liked shades</Text>
+              <Title>No liked shades</Title>
             )}
           </ScrollArea>
         </Paper>
