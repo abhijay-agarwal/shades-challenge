@@ -5,41 +5,6 @@ import axios from "axios";
 
 const url = `https://shades-challenge-server.vercel.app`;
 
-// const getOneTest = async () => {
-//   try {
-//     const count = await client.fetch(`*[_id == "c5a18888-3af3-4d8a-8d0e-555241895f90"]`).then((data) => {
-//       console.log(data[0]);
-//       return (data[0]);
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     return (err);
-//   }
-// }
-
-// const getById = async (id) => {
-//   try {
-//     const count = await client.fetch(`*[_id == "${id}"]`).then((data) => {
-//       console.log(data[0]);
-//       return (data[0]);
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     return (err);
-//   }
-// }
-
-// const getAllTiles = async () => {
-//   try {
-//     const count = await client.fetch(`*[_type == "tile"]`).then((data) => {
-//       console.log(data.length);
-//       return (data.length);
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     return (err);
-//   }
-// }
 
 const getOneTest = async () => {
   const res = await axios.get(url);

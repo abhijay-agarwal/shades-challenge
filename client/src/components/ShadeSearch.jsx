@@ -11,6 +11,8 @@ const icon = <IconSearch style={{ width: 16, height: 16 }} />;
 function ShadeSearch() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(["default"]);
+  const [hasImage, setHasImage] = useState([]);
+  const [noImage, setNoImage] = useState([]);
 
   const { height, width } = useViewportSize();
   const useWidth = width * 0.4;
@@ -21,8 +23,19 @@ function ShadeSearch() {
     getBySearchText(searchTerm).then((data) => {
       console.log(data);
       setSearchResults(data);
+      checkArrayForImage(data);
     });
   }
+
+  const checkArrayForImage = (arr) => {
+    const hasImage = arr.filter((item) => item.image);
+    const noImage = arr.filter((item) => !item.image);
+    setHasImage(hasImage);
+    setNoImage(noImage);
+    console.log("hasImage", hasImage);
+    console.log("noImage", noImage);
+  }
+
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -51,17 +64,26 @@ function ShadeSearch() {
               onChange={(e) => setSearchTerm(e.currentTarget.value)}
               onKeyDown={handleKeyPress} />
             <ScrollArea h={useHeight2}>
-              {searchResults.length > 0 && searchResults[0] !== "default" ? (
-                searchResults.map((result) => (
+              {searchResults.length === 0 ? (
+                <Text>No results</Text>
+              ) : searchResults[0] === "default" ? (
+                <Text>Search shades from the box above</Text>
+              ) : (hasImage.length > 0 && (
+                hasImage.map((result) => (
                   <>
                     <Shade key={result._id} id={result._id} showLiked={true} />
                     <Divider />
                   </>
                 ))
-              ) : searchResults[0] === "default" ? (
-                <Text>Search shades from the box above</Text>
-              ) : (
-                <Text>No results</Text>
+              ))
+              }
+              {noImage[0] !== "default" && (
+                noImage.map((result) => (
+                  <>
+                    <Shade key={result._id} id={result._id} showLiked={true} />
+                    <Divider />
+                  </>
+                ))
               )}
             </ScrollArea>
           </Stack>

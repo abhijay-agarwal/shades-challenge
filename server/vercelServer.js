@@ -2,7 +2,6 @@ import { kv } from "@vercel/kv";
 
 const getLiked = async (req, res) => {
   const id = req.params.id;
-  console.log(typeof id);
   try {
     const member = await kv.sismember('liked', id);
     res.json(member);
@@ -13,7 +12,6 @@ const getLiked = async (req, res) => {
 
 const setLiked = async (req, res) => {
   const id = req.params.id;
-  console.log('ID:', id);
 
   try {
     const added = await kv.sadd('liked', id);
