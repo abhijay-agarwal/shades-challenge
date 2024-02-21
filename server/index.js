@@ -32,11 +32,12 @@ app.get("/test", getOneTest);
 app.get("/all", getAllTiles);
 
 // routes for querying Sanity
-app.get("/search/:searchText", getByAbstractSearchText);
-app.get("/search/exact/title/:searchText", getWholeTitleMatches);
-app.get("/search/title/:searchText", getPartialTitleMatches);
-app.get("/search/exact/label/:searchText", getWholeLabelMatches);
-app.get("/search/label/:searchText", getPartialLabelMatches);
+app.get("/search/:queryString", getByAbstractSearchText);
+app.get("/search/exact/title/:queryString", getWholeTitleMatches);
+app.get("/search/title/:queryString", getPartialTitleMatches);
+app.get("/search/exact/label/:queryString", getWholeLabelMatches);
+app.get("/search/label/:queryString", getPartialLabelMatches);
+app.get("/search/strict/:queryString", getWholeTitleMatches);
 
 // routes for vercel KV store updates
 app.get("/get/:id", getLiked);
