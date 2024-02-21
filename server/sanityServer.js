@@ -107,8 +107,10 @@ const getByAbstractSearchTerm = async (req, res) => {
 
     console.log('Query:', query);
 
-    const data = await client.fetch(query);
-    res.json(data);
+    const data = await client.fetch(query).then((data) => {
+      console.log(data);
+      res.json(data);
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
