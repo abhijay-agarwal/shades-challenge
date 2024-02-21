@@ -10,8 +10,8 @@ app.use(cors({
 }));
 
 
-app.get('/', (res) => {
-  res.json('Hello World!');
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 app.get('/count', sanity.getAllTiles);
 app.get('/:id', sanity.getById);
