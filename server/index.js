@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
-app.get("/search/:searchTerm", getBySearchTerm);
+app.get("/search/:searchText", getBySearchTerm);
 app.get("/get/:id", getLiked);
 app.put("/set/:id", setLiked);
 app.delete("/del/:id", delLiked);

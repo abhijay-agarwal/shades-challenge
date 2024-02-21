@@ -38,7 +38,7 @@ const getById = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'There was an error' });
+    res.status(500).json(err);
   }
 }
 
@@ -50,19 +50,19 @@ const getAllTiles = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'There was an error' });
+    res.status(500).json(err);
   }
 }
 
 const getBySearchTerm = async (req, res) => {
   try {
-    const { searchTerm } = req.params;
+    const { searchText } = req.params;
     const query =
       `*[
         _type == "tile" &&
         !(_id in path("drafts.*")) &&
         status == "published" &&
-        (title match "${searchTerm}*" || labels[].value match "${searchTerm}")
+        (title match "${searchText}*" || labels[].value match "${searchText}")
       ]{
         _id,
         title,
@@ -77,10 +77,28 @@ const getBySearchTerm = async (req, res) => {
   }
   catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'There was an error' });
+    res.status(500).json(err);
   }
 }
 
+const getByAbstractSearchTerm = async (req, res) => {
+  try {
+    const { searchText } = req.params;
+    const keywords = searchText.split(" ");
+
+    const filters = keywords.map(keyword => `(title match "${keyword}*" || labels[].value match "${keyword}")`).join(" || ");
+
+    const query = `*[_type == "article" && (${filters})]`;
+
+    const data = await client.fetch(query);
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+}
+
+
 console.log('Sanity client created')
 
-export { client, getOneTest, getById, getAllTiles, getBySearchTerm };
+export { client, getOneTest, getById, getAllTiles, getBySearchTerm, getByAbstractSearchTerm };
