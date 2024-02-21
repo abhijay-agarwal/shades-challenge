@@ -12,7 +12,7 @@ import { kv } from "@vercel/kv";
 // }
 
 const getLike = async (req, res) => {
-  id = req.params.id;
+  const id = req.params.id;
   try {
     await kv.get(id).then((data) => {
       console.log(data);
