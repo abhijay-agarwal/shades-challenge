@@ -26,7 +26,7 @@ const getOneTest = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   try {
-    const count = await client.fetch(`*[_id == "${id}"]`).then((data) => {
+    await client.fetch(`*[_id == "${id}"]`).then((data) => {
       console.log(data[0]);
       res.json(data[0]);
     });
@@ -38,7 +38,7 @@ const getById = async (req, res) => {
 
 const getAllTiles = async (req, res) => {
   try {
-    const count = await client.fetch(`*[_type == "tile"]`).then((data) => {
+    await client.fetch(`*[_type == "tile"]`).then((data) => {
       console.log(data.length);
       res.json(data.length);
     });

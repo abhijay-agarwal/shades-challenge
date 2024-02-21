@@ -21,7 +21,7 @@ app.get("/like/:id", getLike);
 
 app.listen(server_port, () => {
   console.log(
-    `Server running at http://${server_host}:${server_port}/`
+    `Server running`
   );
 });
 
