@@ -26,7 +26,13 @@ const getOneTest = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   try {
-    await client.fetch(`*[_id == "${id}"]`).then((data) => {
+    await client.fetch(`*[_id == "${id}"]{
+      _id,
+      title,
+      summary,
+      "labels": labels[].value,
+      "image": sharingImage19_5x9Url
+    }`).then((data) => {
       console.log(data[0]);
       res.json(data[0]);
     });

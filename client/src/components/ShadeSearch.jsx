@@ -1,6 +1,6 @@
 import Shade from "./Shade";
 import React, { useState } from "react";
-import { getBySearchTerm } from "../api/getShadeInfo";
+import { getBySearchTerm } from "../api/sanityClient";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider } from "@mantine/core";
 import { IconSearch } from '@tabler/icons-react';
 import '@mantine/core/styles.css';
@@ -41,7 +41,7 @@ function ShadeSearch() {
           {searchResults.length > 0 ? (
             searchResults.map((result) => (
               <>
-                <Shade key={result._id} data={result} />
+                <Shade key={result._id} data={result._id} />
                 <Divider />
               </>
             ))

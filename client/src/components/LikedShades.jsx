@@ -1,6 +1,6 @@
 import Shade from "./Shade";
-import React, { useState } from "react";
-import { getBySearchTerm } from "../api/getShadeInfo";
+import React, { useEffect, useState } from "react";
+import { getAll } from "../api/vercelClient";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider } from "@mantine/core";
 import { IconSearch } from '@tabler/icons-react';
 import '@mantine/core/styles.css';
@@ -9,7 +9,12 @@ import '@mantine/core/styles.css';
 function LikedShades() {
   const [likedShades, setLikedShades] = useState([]);
 
-
+  useEffect(() => {
+    getAll().then((res) => {
+      console.log("liked shades ", res.data);
+      setLikedShades(res.data);
+    });
+  }, []);
 
   return (
     <Flex
@@ -23,8 +28,8 @@ function LikedShades() {
       </Title>
       <Paper withBorder miw={500} p={10}>
         <ScrollArea type="always" h={750} >
-          {searchResults.length > 0 ? (
-            searchResults.map((result) => (
+          {likedShades.length > 0 ? (
+            likedShades.map((result) => (
               <>
                 <Shade key={result._id} data={result} />
                 <Divider />

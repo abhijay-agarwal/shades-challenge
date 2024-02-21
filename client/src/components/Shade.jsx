@@ -1,50 +1,51 @@
-import { getOneTest, getById } from "../api/getShadeInfo";
+import { getOneTest, getById } from "../api/sanityClient";
 import { getLike, setLike, delLike } from "../api/vercelClient";
 import React, { useState, useEffect } from "react";
 import { Paper, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import '@mantine/core/styles.css';
 
-function Shade({ data }) {
+function Shade({ id }) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [likedState, setLikedState] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      console.log(data);
-      setTitle(data.title);
-      const rawSummary = data.summary;
-      const wordLimit = 50;
-      const cappedSummary = rawSummary.split(' ').slice(0, wordLimit).join(' ') + '...';
-      setSummary(cappedSummary);
-      setImage(data.image);
+    if (id) {
+      console.log(id);
+      getById(id).then((data) => {
+        console.log(data);
+        setTitle(data.title);
+        const rawSummary = data.summary;
+        const wordLimit = 50;
+        const cappedSummary = rawSummary.split(' ').slice(0, wordLimit).join(' ') + '...';
+        setSummary(cappedSummary);
+        setImage(data.image);
+      });
     }
-  }, [data]);
+  }, [id]);
 
   useEffect(() => {
-    if (data) {
-      getLike(data._id).then((res) => {
+    if (id) {
+      getLike(id).then((res) => {
         console.log("LIKED?: ", res.data);
         res.data && setLikedState(true);
       });
     }
-  }, [data]);
+  }, [id]);
 
   const handleSwitch = async (e) => {
     console.log("switch pressed: ", e.target.checked);
     setLikedState(e.target.checked);
     try {
       const isChecked = e.target.checked;
-      const response = isChecked ? await setLike(data._id, true) : await delLike(data._id);
+      const response = isChecked ? await setLike(id, true) : await delLike(id);
       console.log(response);
     } catch (error) {
       console.error(error);
     }
 
   };
-
-
 
   return (
     <Group grow maw={500} gap="md" p={10}>
