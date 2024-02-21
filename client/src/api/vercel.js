@@ -3,10 +3,11 @@ import axios from "axios";
 const url = `https://shades-challenge.vercel.app/`;
 
 const setLike = async (id, like) => {
+  console.log(id, like);
   try {
     return await axios.post(`${url}set/${id}/${like}`);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 
 }
