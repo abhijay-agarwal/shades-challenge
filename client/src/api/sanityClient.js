@@ -59,14 +59,21 @@ const getById = async (id) => {
   }
 }
 
-const getBySearchTerm = async (searchTerm) => {
-  const res = await axios.get(`${url}/search/${searchTerm}`);
-  const { data } = res;
-  if (data.length === 0) {
-    return ({});
-  } else {
-    return data;
+const getBySearchText = async (searchTerm) => {
+  if (searchTerm === "") {
+    return (["default"]);
+  }
+  try {
+    const res = await axios.get(`${url}/search/${searchTerm}`);
+    const { data } = res;
+    if (data.length === 0) {
+      return ([]);
+    } else {
+      return data;
+    }
+  } catch (err) {
+    return ([]);
   }
 }
 
-export { getOneTest, getById, getBySearchTerm };
+export { getOneTest, getById, getBySearchText };
