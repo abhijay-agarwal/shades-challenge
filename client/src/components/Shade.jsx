@@ -1,5 +1,5 @@
 import { getOneTest, getById } from "../api/getShadeInfo";
-import { setLike, getLike } from "../api/vercel";
+import { setLike, getLike } from "../api/vercelClient";
 import React, { useState, useEffect } from "react";
 import { Paper, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import '@mantine/core/styles.css';
