@@ -29,4 +29,4 @@ const delLike = async (id) => {
   }
 }
 
-export { setLike, getLike };
+export { getLike, setLike, delLike };

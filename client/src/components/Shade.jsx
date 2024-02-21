@@ -1,5 +1,5 @@
 import { getOneTest, getById } from "../api/getShadeInfo";
-import { setLike, getLike } from "../api/vercelClient";
+import { getLike, setLike, delLike } from "../api/vercelClient";
 import React, { useState, useEffect } from "react";
 import { Paper, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import '@mantine/core/styles.css';
@@ -8,7 +8,7 @@ function Shade({ data }) {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
-  const [liked, setLiked] = useState(false);
+  const [likedState, setLikedState] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -25,19 +25,24 @@ function Shade({ data }) {
   useEffect(() => {
     if (data) {
       getLike(data._id).then((res) => {
-        console.log(res.data);
-        res.data ? setLiked(data._id, res.data) : setLiked(data._id, false);
+        console.log("LIKED?: ", res.data);
+        res.data && setLikedState(true);
       });
     }
   }, [data]);
 
   const handleSwitch = async (e) => {
-    console.log(data._id);
-    // console.log(e.target.checked);
-    await setLike(data._id, e.target.checked).then((res) => {
-      console.log(res)
-    });
-  }
+    try {
+      const isChecked = e.target.checked;
+      const response = isChecked ? await setLike(data._id, true) : await delLike(data._id);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+    setLikedState(e.target.checked);
+  };
+
+
 
   return (
     <Group grow maw={500} gap="md" p={10}>
@@ -46,7 +51,7 @@ function Shade({ data }) {
         <Title>{title}</Title>
         <Text style={{ fontSize: 12 }}>{summary}</Text>
       </Stack>
-      <Switch size="xl" value={liked} onLabel="LIKED" onChange={handleSwitch} />
+      <Switch size="xl" checked={likedState} onLabel="LIKED" onChange={handleSwitch} />
     </Group>
   );
 }
