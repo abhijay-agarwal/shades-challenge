@@ -19,7 +19,6 @@ function Shade({ id, showLiked }) {
   useEffect(() => {
     if (id) {
       getById(id).then((data) => {
-        console.log(data);
         setTitle(data.title);
         const rawSummary = data.summary;
         const wordLimit = 75;
@@ -43,7 +42,6 @@ function Shade({ id, showLiked }) {
     try {
       const isChecked = e.target.checked;
       const response = isChecked ? await setLike(id, true) : await delLike(id);
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

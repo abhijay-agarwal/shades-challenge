@@ -87,7 +87,7 @@ const getExactTitleMatches = async (req, res) => {
   }
 }
 
-const getExactLabelMatches = async (req, res) => {
+const getWholePhraseMatches = async (req, res) => {
   try {
     const { searchText } = req.params;
     const keywords = searchText.split(" ").filter(word => !stopwords.includes(word.toLowerCase()));
@@ -120,6 +120,7 @@ const getExactLabelMatches = async (req, res) => {
 const getByAbstractSearchTerm = async (req, res) => {
   try {
     const { searchText } = req.params;
+    console.log(searchText);
     const keywords = searchText.split(" ").filter(word => !stopwords.includes(word.toLowerCase()));
 
     const filters = keywords.map(keyword => `(title match "${keyword}*"  || labels[].value match "${keyword}")`).join(" || ");
