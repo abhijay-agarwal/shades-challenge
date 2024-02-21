@@ -15,7 +15,7 @@ function Shade({ id, showLiked }) {
 
   const { refreshLikedShades } = useLikedShades();
 
-  const { width } = useViewportSize();
+  const { height, width } = useViewportSize();
 
   useEffect(() => {
     if (id) {
@@ -48,6 +48,7 @@ function Shade({ id, showLiked }) {
       wrap="nowrap"
       py={10}
       maw={width * 0.35}
+      mah={height * 0.25}
     >
       <Image maw={100} src={image ? image : "https://seeeff-prod-static-images.imgix.net/shades_logo.png"} />
       <Stack w={width * 0.3}>
