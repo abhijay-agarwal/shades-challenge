@@ -19,7 +19,7 @@ const getOneTest = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'There was an error' });
+    res.status(500).json(err);
   }
 }
 
@@ -104,6 +104,8 @@ const getByAbstractSearchTerm = async (req, res) => {
         "labels": labels[].value,
         "image": sharingImage19_5x9Url
       }`;
+
+    console.log('Query:', query);
 
     const data = await client.fetch(query);
     res.json(data);

@@ -44,7 +44,6 @@ function ShadeSearch() {
         <Paper withBorder w={useWidth} h={useHeight} p={10}>
           <Stack gap="md">
             <TextInput
-              defaultValue={"default"}
               placeholder="Search for a shade"
               rightSectionPointerEvents={() => handleSearch}
               rightSection={icon}
