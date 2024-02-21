@@ -1,9 +1,11 @@
 import { kv } from "@vercel/kv";
 
-async function setLike(id, like) {
+const setLike = async (id, like) => {
   try {
     await kv.set(id, like);
   } catch (error) {
     console.error(error);
   }
 }
+
+export { setLike };
