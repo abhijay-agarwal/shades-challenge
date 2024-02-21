@@ -5,7 +5,7 @@ import {
 import ShadeSearch from './components/ShadeSearch';
 import LikedShades from './components/LikedShades';
 import { LikedShadesProvider } from './context/LikedShadesContext';
-import { Flex, Center } from '@mantine/core';
+import { Flex, Center, Group } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import '@mantine/core/styles.css';
 
@@ -17,16 +17,19 @@ function App() {
     <LikedShadesProvider>
       <Routes>
         <Route path="/" element={
-          <Center mx={width * 0.05} h={height} w={width}>
-            <Flex
+          <Center h={height} w={width}>
+            {/* <Flex
               justify="center"
               align="flex-end"
               direction="row"
               wrap="nowrap"
-            >
+              gap={width * 0.05}
+            > */}
+            <Group justify="space-between" gap={width * 0.05} >
               <ShadeSearch />
               <LikedShades />
-            </Flex>
+            </Group>
+            {/* </Flex> */}
           </Center>
         } />
       </Routes>

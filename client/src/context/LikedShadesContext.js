@@ -8,7 +8,6 @@ export const LikedShadesProvider = ({ children }) => {
 
   const refreshLikedShades = () => {
     getAll().then((res) => {
-      console.log("liked shades ", res.data);
       setLikedShades(res.data);
     });
   }
