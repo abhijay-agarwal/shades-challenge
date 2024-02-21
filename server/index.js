@@ -1,7 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const config = require("./config");
-const sanity = require("./sanity");
+import express from "express";
+import cors from "cors";
+import { server_port, server_host } from "./config";
+import { getAllTiles, getById, getBySearchTerm } from "./sanity";
+import { getLike } from "./vercel";
 
 const app = express();
 app.use(
@@ -13,14 +14,15 @@ app.use(
 app.get("/", (req, res) => {
   res.json("Hello World!");
 });
-app.get("/count", sanity.getAllTiles);
-app.get("/:id", sanity.getById);
-app.get("/search/:searchTerm", sanity.getBySearchTerm);
+app.get("/count", getAllTiles);
+app.get("/id/:id", getById);
+app.get("/search/:searchTerm", getBySearchTerm);
+app.get("/like/:id", getLike);
 
-app.listen(config.server_port, () => {
+app.listen(server_port, () => {
   console.log(
-    `Server running at http://${config.server_host}:${config.server_port}/`
+    `Server running at http://${server_host}:${server_port}/`
   );
 });
 
-module.exports = app;
+export default app;

@@ -8,4 +8,12 @@ const setLike = async (id, like) => {
   }
 }
 
-export { setLike };
+const getLike = async (id) => {
+  try {
+    return await kv.get(id);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { setLike, getLike };

@@ -1,5 +1,5 @@
 import { getOneTest, getById } from "../api/getShadeInfo";
-import { setLike } from "../api/vercel";
+import { setLike, getLike } from "../api/vercel";
 import React, { useState, useEffect } from "react";
 import { Paper, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import '@mantine/core/styles.css';
@@ -22,8 +22,10 @@ function Shade({ data }) {
   }, [data]);
 
   const handleSwitch = async (e) => {
-    console.log(e.target.checked);
-    await setLike(data.id, e.target.checked);
+    console.log(data._id);
+    await setLike(data._id, true).then((res) => {
+      console.log(res)
+    });
   }
 
   return (
