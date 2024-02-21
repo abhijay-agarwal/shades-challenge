@@ -2,7 +2,7 @@ import axios from "axios";
 // import client from "./sanity";
 import config from "./config.json";
 
-// const url = `http://${config.server_host}:${config.server_port}/`;
+// const url = `http://${config.server_host}:${config.server_port}`;
 
 const url = `https://shades-challenge.vercel.app`;
 

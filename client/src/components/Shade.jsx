@@ -26,7 +26,7 @@ function Shade({ data }) {
     if (data) {
       getLike(data._id).then((res) => {
         console.log(res.data);
-        setLiked(res.data || false);
+        setLiked(data._id, res.data || false);
       });
     }
   }, [data]);
