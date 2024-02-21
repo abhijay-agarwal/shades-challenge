@@ -1,16 +1,19 @@
-import { kv } from "@vercel/kv";
+import axios from "axios";
+
+const url = `https://shades-challenge.vercel.app/`;
 
 const setLike = async (id, like) => {
   try {
-    await kv.set(id, like);
+    return await axios.post(`${url}like/${id}?like=${like}`);
   } catch (error) {
     console.error(error);
   }
+
 }
 
 const getLike = async (id) => {
   try {
-    return await kv.get(id);
+    return await axios.get(`${url}like/${id}`);
   } catch (error) {
     console.error(error);
   }

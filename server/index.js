@@ -20,7 +20,7 @@ app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
 app.get("/search/:searchTerm", getBySearchTerm);
 app.get("/like/:id", getLike);
-app.post("/like?id=&like=", setLike);
+app.post("/like/:id", setLike);
 
 app.listen(server_port, () => {
   console.log(
