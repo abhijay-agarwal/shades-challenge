@@ -1,5 +1,6 @@
 import { getById } from "../utils/sanityClient";
 import { getLike, setLike, delLike } from "../utils/vercelClient";
+import { conciseSummary } from "../utils/helpers";
 import React, { useState, useEffect } from "react";
 import { Flex, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import { useLikedShades } from "../context/LikedShadesContext";
@@ -20,19 +21,8 @@ function Shade({ id, showLiked }) {
     if (id) {
       getById(id).then((data) => {
         setTitle(data.title);
-        const rawSummary = data.summary;
-        const wordLimit = 75;
-        const cappedSummary = rawSummary.split(' ').slice(0, wordLimit).join(' ') + '...';
-        setSummary(cappedSummary);
+        setSummary(conciseSummary(data.summary));
         setImage(data.image);
-      });
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (id) {
-      getLike(id).then((res) => {
-        res.data && setLikedState(true);
       });
     }
   }, [id]);
@@ -41,7 +31,7 @@ function Shade({ id, showLiked }) {
     setLikedState(e.target.checked);
     try {
       const isChecked = e.target.checked;
-      const response = isChecked ? await setLike(id, true) : await delLike(id);
+      const response = isChecked ? await setLike(id) : await delLike(id);
     } catch (error) {
       console.error(error);
     }

@@ -27,10 +27,20 @@ const partition = (results, query) => {
 const checkArrayForImage = (arr) => {
   const hasImage = arr.filter((item) => item.image);
   const noImage = arr.filter((item) => !item.image);
-  setHasImage(hasImage);
-  setNoImage(noImage);
   console.log("hasImage", hasImage);
   console.log("noImage", noImage);
+  return [hasImage, noImage];
 }
 
-export { partition, checkArrayForImage };
+const conciseSummary = (summary) => {
+  const charLimit = 160;
+  const wordLimit = 40;
+  if (summary.length > charLimit) {
+    return summary.split(' ').slice(0, wordLimit).join(' ') + '...';
+  }
+  else {
+    return summary;
+  }
+}
+
+export { partition, checkArrayForImage, conciseSummary };

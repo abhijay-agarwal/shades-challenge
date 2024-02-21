@@ -1,6 +1,7 @@
 import Shade from "./Shade";
 import React, { useEffect, useState } from "react";
 import { getByAbstractSearchText } from "../utils/sanityClient";
+import { checkArrayForImage } from "../utils/helpers";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider, Stack } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
@@ -42,6 +43,9 @@ function ShadeSearch() {
     getByAbstractSearchText(queryString).then((data) => {
       console.log(data);
       setSearchResults(data);
+      const [hasImage, noImage] = checkArrayForImage(data);
+      setHasImage(hasImage);
+      setNoImage(noImage);
     });
   }
 

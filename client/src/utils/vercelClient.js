@@ -13,8 +13,7 @@ const getLike = async (id) => {
   }
 }
 
-const setLike = async (id, like) => {
-  console.log(id, like);
+const setLike = async (id) => {
   try {
     return await axios.put(`${url}/set/${id}`);
   } catch (error) {
