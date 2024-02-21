@@ -11,7 +11,7 @@ app.use(cors({
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json('Hello World!');
 });
 app.get('/count', sanity.getAllTiles);
 app.get('/:id', sanity.getById);
