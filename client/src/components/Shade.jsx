@@ -32,6 +32,8 @@ function Shade({ data }) {
   }, [data]);
 
   const handleSwitch = async (e) => {
+    console.log("switch pressed: ", e.target.checked);
+    setLikedState(e.target.checked);
     try {
       const isChecked = e.target.checked;
       const response = isChecked ? await setLike(data._id, true) : await delLike(data._id);
@@ -39,7 +41,7 @@ function Shade({ data }) {
     } catch (error) {
       console.error(error);
     }
-    setLikedState(e.target.checked);
+
   };
 
 
