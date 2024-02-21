@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
 app.get("/search/:searchTerm", getBySearchTerm);
-app.get("/like", getLike);
-app.post("/like", setLike);
+app.get("/get/:id", getLike);
+app.post("/set/:id/:like", setLike);
 
 app.listen(server_port, () => {
   console.log(

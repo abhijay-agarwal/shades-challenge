@@ -4,7 +4,7 @@ const url = `https://shades-challenge.vercel.app/`;
 
 const setLike = async (id, like) => {
   try {
-    return await axios.post(`${url}like?id=${id}&like=${like}`);
+    return await axios.post(`${url}like/${id}/${like}`);
   } catch (error) {
     console.error(error);
   }
@@ -13,7 +13,7 @@ const setLike = async (id, like) => {
 
 const getLike = async (id) => {
   try {
-    return await axios.get(`${url}like?id=${id}`);
+    return await axios.get(`${url}like/${id}`);
   } catch (error) {
     console.error(error);
   }
