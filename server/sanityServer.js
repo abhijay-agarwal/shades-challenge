@@ -54,7 +54,7 @@ const getAllTiles = async (req, res) => {
   }
 }
 
-const getBySearchTerm = async (req, res) => {
+const getByTitleText = async (req, res) => {
   try {
     const { searchText } = req.params;
     const query =
@@ -64,7 +64,7 @@ const getBySearchTerm = async (req, res) => {
         devloping == false &&
         !(_id in path("drafts.*")) &&
         status == "published" &&
-        (title match "${searchText}*" || labels[].value match "${searchText}")
+        (title match "${searchText}"
       ]{
         _id,
         title,
@@ -72,10 +72,8 @@ const getBySearchTerm = async (req, res) => {
         "labels": labels[].value,
         "image": sharingImage19_5x9Url
       }`;
-    await client.fetch(query).then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+    const data = await client.fetch(query);
+    res.json(data);
   }
   catch (err) {
     console.error(err);
@@ -92,7 +90,20 @@ const getByAbstractSearchTerm = async (req, res) => {
 
     console.log('Filters:', filters);
 
-    const query = `*[_type == "tile" && !summary match "lorem*" &&  developing == false &&  (${filters})]`;
+    const query = `
+      *[_type == "tile" && 
+      !summary match "lorem*" && 
+      developing == false && 
+      !(_id in path("drafts.*")) &&
+      status == "published" &&
+      (${filters})]
+      {
+        _id,
+        title,
+        summary,
+        "labels": labels[].value,
+        "image": sharingImage19_5x9Url
+      }`;
 
     const data = await client.fetch(query);
     res.json(data);
@@ -105,4 +116,4 @@ const getByAbstractSearchTerm = async (req, res) => {
 
 console.log('Sanity client created')
 
-export { client, getOneTest, getById, getAllTiles, getBySearchTerm, getByAbstractSearchTerm };
+export { client, getOneTest, getById, getAllTiles, getByTitleText, getByAbstractSearchTerm };
