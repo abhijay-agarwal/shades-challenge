@@ -13,6 +13,12 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://shades-challenge-zko8.vercel.app'); // Specific origin
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.get("/", (req, res) => {
   res.json("Hello World!");
 });
