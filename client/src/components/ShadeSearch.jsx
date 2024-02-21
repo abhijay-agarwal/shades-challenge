@@ -60,7 +60,7 @@ function ShadeSearch() {
                   </>
                 ))
               ) : searchResults[0] === "default" ? (
-                <Text>Search Shades from the box above</Text>
+                <Text>Search shades from the box above</Text>
               ) : (
                 <Text>No results</Text>
               )}

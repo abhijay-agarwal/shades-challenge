@@ -29,12 +29,12 @@ const delLike = async (id) => {
   }
 }
 
-const getAll = async () => {
+const getAllLiked = async () => {
   try {
-    return await axios.get(`${url}/all`);
+    return await axios.get(`${url}/liked`);
   } catch (error) {
     console.error(error);
   }
 }
 
-export { getLike, setLike, delLike, getAll };
+export { getLike, setLike, delLike, getAllLiked };

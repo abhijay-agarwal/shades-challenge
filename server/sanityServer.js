@@ -90,6 +90,8 @@ const getByAbstractSearchTerm = async (req, res) => {
 
     const filters = keywords.map(keyword => `(title match "${keyword}*"  || labels[].value match "${keyword}")`).join(" || ");
 
+    console.log('Filters:', filters);
+
     const query = `*[_type == "tile" && !summary match "lorem*" &&  developing == false &&  (${filters})]`;
 
     const data = await client.fetch(query);

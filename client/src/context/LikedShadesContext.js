@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { getAll } from '../api/vercelClient';
+import { getAllLiked } from '../api/vercelClient';
 
 const LikedShadesContext = createContext();
 
@@ -7,7 +7,7 @@ export const LikedShadesProvider = ({ children }) => {
   const [likedShades, setLikedShades] = useState([]);
 
   const refreshLikedShades = () => {
-    getAll().then((res) => {
+    getAllLiked().then((res) => {
       setLikedShades(res.data);
     });
   }

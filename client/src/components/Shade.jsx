@@ -63,7 +63,7 @@ function Shade({ id, showLiked }) {
       py={10}
     >
       <Image mah={200} src={image ? image : "https://images.bannerbear.com/direct/XNblonZr44E1Prw7v3/requests/000/016/445/892/w0gWbdEPaYaoqwxZ6rVklOA5j/c30f70a3dfd2385daf733f0dbae4793e2818ebba.png"} />
-      <Stack miw={width * 0.2}>
+      <Stack w={width * 0.3}>
         <Title>{title}</Title>
         <Text style={{ fontSize: 12 }}>{summary}</Text>
       </Stack>
