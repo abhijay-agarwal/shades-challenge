@@ -1,6 +1,6 @@
 import Shade from "./Shade";
 import React, { useEffect, useState } from "react";
-import { getAllLiked } from "../api/vercelClient";
+import { getAllLiked } from "../utils/vercelClient";
 import { Flex, Text, Stack, ScrollArea, Title, Paper, Divider } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
 import { useLikedShades } from "../context/LikedShadesContext";

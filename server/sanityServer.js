@@ -171,7 +171,7 @@ const getWholeLabelMatches = async (req, res) => {
   }
 }
 
-const getByAbstractSearchTerm = async (req, res) => {
+const getByAbstractSearchText = async (req, res) => {
   try {
     const { searchText } = req.params;
     console.log(searchText);
@@ -203,4 +203,4 @@ const getByAbstractSearchTerm = async (req, res) => {
   }
 }
 
-export { client, getOneTest, getById, getAllTiles, getPartialTitleMatches, getPartialLabelMatches, getWholeTitleMatches, getWholeLabelMatches, getByAbstractSearchTerm };
+export { client, getOneTest, getById, getAllTiles, getPartialTitleMatches, getPartialLabelMatches, getWholeTitleMatches, getWholeLabelMatches, getByAbstractSearchText };

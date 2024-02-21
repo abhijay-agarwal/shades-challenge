@@ -1,5 +1,5 @@
-import { getById } from "../api/sanityClient";
-import { getLike, setLike, delLike } from "../api/vercelClient";
+import { getById } from "../utils/sanityClient";
+import { getLike, setLike, delLike } from "../utils/vercelClient";
 import React, { useState, useEffect } from "react";
 import { Flex, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
 import { useLikedShades } from "../context/LikedShadesContext";
@@ -64,7 +64,7 @@ function Shade({ id, showLiked }) {
         <Title>{title}</Title>
         <Text style={{ fontSize: 12 }}>{summary}</Text>
       </Stack>
-      {showLiked && <Switch size="xl" checked={likedState} onLabel="LIKED" onChange={handleSwitch} />}
+      {showLiked && <Switch size="lg" checked={likedState} onLabel="LIKED" onChange={handleSwitch} />}
       {/* <input type="checkbox" checked={likedState} onChange={handleSwitch} style={{ size: 50 }} /> */}
     </Flex>
   );

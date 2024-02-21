@@ -43,7 +43,7 @@ const getByTitleText = async (searchTerm) => {
   }
 }
 
-const getBySearchText = async (searchTerm) => {
+const getByAbstractSearchText = async (searchTerm) => {
   if (searchTerm === "") {
     return (["default"]);
   }
@@ -60,4 +60,4 @@ const getBySearchText = async (searchTerm) => {
   }
 }
 
-export { getOneTest, getById, getByTitleText, getBySearchText };
+export { getOneTest, getById, getByTitleText, getByAbstractSearchText };

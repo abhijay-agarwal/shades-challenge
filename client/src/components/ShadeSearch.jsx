@@ -1,6 +1,6 @@
 import Shade from "./Shade";
-import React, { useState } from "react";
-import { getBySearchText } from "../api/sanityClient";
+import React, { useEffect, useState } from "react";
+import { getByAbstractSearchText } from "../utils/sanityClient";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider, Stack } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
@@ -9,10 +9,29 @@ import '@mantine/core/styles.css';
 const icon = <IconSearch style={{ width: 16, height: 16 }} />;
 
 function ShadeSearch() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [queryString, setQueryString] = useState('');
   const [searchResults, setSearchResults] = useState(["default"]);
   const [hasImage, setHasImage] = useState([]);
   const [noImage, setNoImage] = useState([]);
+
+  // const [partitioned, setPartitioned] = useState([]);
+
+
+  // useEffect(() => {
+  //   if (searchResults.length > 0) {
+  //     const partitionedResults = partition(searchResults, queryString);
+  //     console.log("partitionedResults", partitionedResults);
+  //     setPartitioned(partitionedResults);
+  //   } else {
+  //     setPartitioned([]);
+  //   }
+  // }, [searchResults]);
+
+  // useEffect(() => {
+  //   if (partitioned) {
+  //     checkArrayForImage(partitioned);
+  //   }
+  // }, [partitioned]);
 
   const { height, width } = useViewportSize();
   const useWidth = width * 0.4;
@@ -20,26 +39,16 @@ function ShadeSearch() {
   const useHeight2 = height * 0.65;
 
   const handleSearch = () => {
-    getBySearchText(searchTerm).then((data) => {
+    getByAbstractSearchText(queryString).then((data) => {
       console.log(data);
       setSearchResults(data);
-      checkArrayForImage(data);
     });
-  }
-
-  const checkArrayForImage = (arr) => {
-    const hasImage = arr.filter((item) => item.image);
-    const noImage = arr.filter((item) => !item.image);
-    setHasImage(hasImage);
-    setNoImage(noImage);
-    console.log("hasImage", hasImage);
-    console.log("noImage", noImage);
   }
 
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      console.log("searching for", searchTerm);
+      console.log("searching for", queryString);
       handleSearch();
     }
   }
@@ -60,8 +69,8 @@ function ShadeSearch() {
               placeholder="Search for a shade"
               rightSectionPointerEvents={() => handleSearch}
               rightSection={icon}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.currentTarget.value)}
+              value={queryString}
+              onChange={(e) => setQueryString(e.currentTarget.value)}
               onKeyDown={handleKeyPress} />
             <ScrollArea h={useHeight2}>
               {searchResults.length === 0 ? (

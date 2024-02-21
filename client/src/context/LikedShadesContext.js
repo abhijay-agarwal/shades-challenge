@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { getAllLiked } from '../api/vercelClient';
+import { getAllLiked } from '../utils/vercelClient';
 
 const LikedShadesContext = createContext();
 

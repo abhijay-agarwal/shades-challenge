@@ -1,6 +1,15 @@
 import express from "express";
 import cors from "cors";
-import { getAllTiles, getById, getByAbstractSearchTerm, getOneTest, getPartialTitleMatches, getWholeTitleMatches, getPartialLabelMatches, getWholeLabelMatches } from "./sanityServer.js";
+import {
+  getAllTiles,
+  getById,
+  getByAbstractSearchText,
+  getOneTest,
+  getPartialTitleMatches,
+  getWholeTitleMatches,
+  getPartialLabelMatches,
+  getWholeLabelMatches
+} from "./sanityServer.js";
 import { setLiked, getLiked, delLiked, getAllLiked } from "./vercelServer.js";
 
 const server_port = 8080;
@@ -23,7 +32,7 @@ app.get("/test", getOneTest);
 app.get("/all", getAllTiles);
 
 // routes for querying Sanity
-app.get("/search/:searchText", getByAbstractSearchTerm);
+app.get("/search/:searchText", getByAbstractSearchText);
 app.get("/search/exact/title/:searchText", getWholeTitleMatches);
 app.get("/search/title/:searchText", getPartialTitleMatches);
 app.get("/search/exact/label/:searchText", getWholeLabelMatches);
