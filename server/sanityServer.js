@@ -90,6 +90,7 @@ const getByAbstractSearchTerm = async (req, res) => {
 
     const query = `
       *[_type == "tile" &&
+      !(summary match "lorem*") &&
       developing == false &&
       !(_id in path("drafts.*")) &&
       status == "published" &&
