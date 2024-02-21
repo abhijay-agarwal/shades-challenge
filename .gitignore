@@ -134,3 +134,6 @@ dist
 
 # prod builds
 build
+
+# vercel
+.vercel

@@ -19,7 +19,7 @@ const getLike = async (req, res) => {
       res.json(data);
     });
   } catch (error) {
-    res.status(500).json({ message: 'There was an error' });
+    res.json(error.message);
   }
 }
 

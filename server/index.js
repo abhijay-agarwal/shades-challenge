@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { server_port, server_host } from "./config";
-import { getAllTiles, getById, getBySearchTerm } from "./sanity";
-import { getLike } from "./vercel";
+import json from "./config.json" with {type: "json"};
+import { getAllTiles, getById, getBySearchTerm } from "./sanity.js";
+import { getLike } from "./vercel.js";
+
+const server_port = json.server_port;
+const server_host = json.server_host;
 
 const app = express();
 app.use(
