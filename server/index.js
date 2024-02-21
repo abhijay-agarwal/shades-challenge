@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
-import json from "./config.json" with {type: "json"};
 import { getAllTiles, getById, getBySearchTerm } from "./sanity.js";
-import { getLike } from "./vercel.js";
+import { setLike, getLike } from "./vercel.js";
+
+const json = require("./config.json");
 
 const server_port = json.server_port;
 const server_host = json.server_host;
@@ -21,6 +22,7 @@ app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
 app.get("/search/:searchTerm", getBySearchTerm);
 app.get("/like/:id", getLike);
+app.post("/like?id=&like=", setLike);
 
 app.listen(server_port, () => {
   console.log(
