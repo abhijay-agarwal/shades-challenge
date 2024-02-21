@@ -2,25 +2,22 @@ import { kv } from "@vercel/kv";
 
 const getLiked = async (req, res) => {
   const id = req.params.id;
+  console.log(typeof id);
   try {
-    await kv.get(id).then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+    const member = await kv.sismember('liked', id);
+    res.json(member);
   } catch (error) {
-    res.json(error.message);
+    res.json(error);
   }
 }
 
 const setLiked = async (req, res) => {
   const id = req.params.id;
-  console.log('THIS IS THE ID', id);
+  console.log('ID:', id);
 
   try {
-    await kv.set(id, true).then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+    const added = await kv.sadd('liked', id);
+    res.json(added);
   } catch (error) {
     res.json(error);
   }
@@ -29,13 +26,21 @@ const setLiked = async (req, res) => {
 const delLiked = async (req, res) => {
   const id = req.params.id;
   try {
-    await kv.del(id).then((data) => {
-      console.log(data);
-      res.json(data);
-    });
+    const deleted = await kv.srem('liked', id);
+    res.json(deleted);
   } catch (error) {
     res.json(error.message);
   }
 }
 
-export { getLiked, setLiked, delLiked };
+const getAllLiked = async (req, res) => {
+  try {
+    const allLiked = await kv.smembers('liked');
+    res.json(allLiked);
+  } catch (error) {
+    res.json(error);
+  }
+}
+
+
+export { getLiked, setLiked, delLiked, getAllLiked };
