@@ -43,6 +43,23 @@ const getByTitleText = async (queryString) => {
   }
 }
 
+const getStrictestMatches = async (queryString) => {
+  if (queryString === "") {
+    return (["default"]);
+  }
+  try {
+    const res = await axios.get(`${url}/search/strictest/${queryString}`);
+    const { data } = res;
+    if (data.length === 0) {
+      return ([]);
+    } else {
+      return data;
+    }
+  } catch (err) {
+    return ([]);
+  }
+}
+
 const getStrictMatches = async (queryString) => {
   if (queryString === "") {
     return (["default"]);
@@ -77,4 +94,4 @@ const getByAbstractSearchText = async (queryString) => {
   }
 }
 
-export { getOneTest, getById, getByTitleText, getStrictMatches, getByAbstractSearchText };
+export { getOneTest, getById, getByTitleText, getStrictestMatches, getStrictMatches, getByAbstractSearchText };
