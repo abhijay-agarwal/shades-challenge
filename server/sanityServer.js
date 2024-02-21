@@ -181,8 +181,7 @@ const getStrictMatches = async (req, res) => {
       developing == false &&
       !(_id in path("drafts.*")) &&
       status == "published" &&
-      image != null &&
-      (title match "${queryString}" || (summary match "${queryString}" && labels[].value match "${queryString}"))]
+      (title match "${queryString}" || (summary match "${queryString}*" && labels[].value match "${queryString}"))]
       {
         _id,
         title,
