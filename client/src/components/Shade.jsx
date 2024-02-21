@@ -1,7 +1,8 @@
-import { getOneTest, getById } from "../api/sanityClient";
+import { getById } from "../api/sanityClient";
 import { getLike, setLike, delLike } from "../api/vercelClient";
 import React, { useState, useEffect } from "react";
-import { Paper, Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
+import { Group, Text, Image, Stack, Switch, Title } from "@mantine/core";
+import { useLikedShades } from "../context/LikedShadesContext";
 import '@mantine/core/styles.css';
 
 function Shade({ id }) {
@@ -9,6 +10,8 @@ function Shade({ id }) {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [likedState, setLikedState] = useState(false);
+
+  const { refreshLikedShades } = useLikedShades();
 
   useEffect(() => {
     if (id) {
@@ -35,7 +38,6 @@ function Shade({ id }) {
   }, [id]);
 
   const handleSwitch = async (e) => {
-    console.log("switch pressed: ", e.target.checked);
     setLikedState(e.target.checked);
     try {
       const isChecked = e.target.checked;
@@ -45,6 +47,7 @@ function Shade({ id }) {
       console.error(error);
     }
 
+    refreshLikedShades();
   };
 
   return (

@@ -3,21 +3,19 @@ import React, { useEffect, useState } from "react";
 import { getAll } from "../api/vercelClient";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
+import { useLikedShades } from "../context/LikedShadesContext";
 import '@mantine/core/styles.css';
 
 
 function LikedShades() {
-  const [likedShades, setLikedShades] = useState([]);
+  const { likedShades, refreshLikedShades } = useLikedShades();
 
   const { height, width } = useViewportSize();
   const useWidth1 = width * 0.45;
   const useHeight1 = height * 0.75;
 
   useEffect(() => {
-    getAll().then((res) => {
-      console.log("liked shades ", res.data);
-      setLikedShades(res.data);
-    });
+    refreshLikedShades();
   }, []);
 
   return (
