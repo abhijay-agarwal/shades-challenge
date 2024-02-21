@@ -26,7 +26,7 @@ const setLiked = async (req, res) => {
   }
 }
 
-const deleteLiked = async (req, res) => {
+const delLiked = async (req, res) => {
   const id = req.params.id;
   try {
     await kv.del(id).then((data) => {
@@ -38,4 +38,4 @@ const deleteLiked = async (req, res) => {
   }
 }
 
-export { getLiked, setLiked, deleteLiked as delLiked };
+export { getLiked, setLiked, delLiked };

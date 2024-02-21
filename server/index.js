@@ -26,8 +26,8 @@ app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
 app.get("/search/:searchTerm", getBySearchTerm);
 app.get("/get/:id", getLiked);
-app.get("/set/:id", setLiked);
-app.get("/del/:id", delLiked);
+app.put("/set/:id", setLiked);
+app.delete("/del/:id", delLiked);
 
 app.listen(server_port, () => {
   console.log(
