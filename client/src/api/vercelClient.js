@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const url = `https://shades-challenge.vercel.app`;
+const url = `https://shades-challenge.vercel.app`;
 
-const url = 'http://localhost:8080';
+// const url = 'http://localhost:8080';
 
 const setLike = async (id, like) => {
   console.log(id, like);
