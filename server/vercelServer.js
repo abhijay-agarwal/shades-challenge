@@ -1,12 +1,11 @@
 import { kv } from "@vercel/kv";
 
-const setLike = async (req, res) => {
+const setLiked = async (req, res) => {
   const id = req.params.id;
   console.log('THIS IS THE ID', id);
-  const like = req.params.like;
 
   try {
-    await kv.set(id, like).then((data) => {
+    await kv.set(id, false).then((data) => {
       console.log(data);
       res.json(data);
     });
@@ -15,7 +14,7 @@ const setLike = async (req, res) => {
   }
 }
 
-const getLike = async (req, res) => {
+const getLiked = async (req, res) => {
   const id = req.params.id;
   try {
     await kv.get(id).then((data) => {
@@ -27,4 +26,4 @@ const getLike = async (req, res) => {
   }
 }
 
-export { setLike, getLike };
+export { setLiked, getLiked };
