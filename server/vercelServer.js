@@ -3,7 +3,7 @@ import { kv } from "@vercel/kv";
 const setLike = async (req, res) => {
   const id = req.params.id;
   console.log('THIS IS THE ID', id);
-  like = req.params.like;
+  const like = req.params.like;
 
   try {
     await kv.set(id, like).then((data) => {

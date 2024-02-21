@@ -1,7 +1,4 @@
 import axios from "axios";
-// import client from "./sanity";
-import config from "./config.json";
-
 // const url = `http://localhost:8080`;
 
 const url = `https://shades-challenge.vercel.app`;
