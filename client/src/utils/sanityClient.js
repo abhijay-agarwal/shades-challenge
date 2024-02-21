@@ -1,8 +1,6 @@
 import axios from "axios";
 // const url = `http://localhost:8080`;
 
-// const url = `https://shades-challenge.vercel.app`;
-
 const url = `https://shades-challenge-server.vercel.app`;
 
 
@@ -60,7 +58,7 @@ const getStrictestMatches = async (queryString) => {
   }
 }
 
-const getStrictMatches = async (queryString) => {
+const getStrictImageMatches = async (queryString) => {
   if (queryString === "") {
     return (["default"]);
   }
@@ -77,7 +75,7 @@ const getStrictMatches = async (queryString) => {
   }
 }
 
-const getByAbstractSearchText = async (queryString) => {
+const getFromQuery = async (queryString) => {
   if (queryString === "") {
     return (["default"]);
   }
@@ -94,4 +92,4 @@ const getByAbstractSearchText = async (queryString) => {
   }
 }
 
-export { getOneTest, getById, getByTitleText, getStrictestMatches, getStrictMatches, getByAbstractSearchText };
+export { getOneTest, getById, getByTitleText, getStrictestMatches, getStrictImageMatches, getFromQuery };

@@ -1,6 +1,6 @@
 import Shade from "./Shade";
 import React, { useEffect, useState } from "react";
-import { getByAbstractSearchText, getStrictMatches } from "../utils/sanityClient";
+import { getFromQuery, getStrictestMatches, getStrictImageMatches } from "../utils/sanityClient";
 import { checkArrayForImage } from "../utils/helpers";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider, Stack } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
@@ -15,32 +15,13 @@ function ShadeSearch() {
   const [hasImage, setHasImage] = useState([]);
   const [noImage, setNoImage] = useState([]);
 
-  // const [partitioned, setPartitioned] = useState([]);
-
-
-  // useEffect(() => {
-  //   if (searchResults.length > 0) {
-  //     const partitionedResults = partition(searchResults, queryString);
-  //     console.log("partitionedResults", partitionedResults);
-  //     setPartitioned(partitionedResults);
-  //   } else {
-  //     setPartitioned([]);
-  //   }
-  // }, [searchResults]);
-
-  // useEffect(() => {
-  //   if (partitioned) {
-  //     checkArrayForImage(partitioned);
-  //   }
-  // }, [partitioned]);
-
   const { height, width } = useViewportSize();
   const useWidth = width * 0.4;
   const useHeight = height * 0.75;
   const useHeight2 = height * 0.65;
 
   const handleSearch = () => {
-    getStrictMatches(queryString).then((data) => {
+    getStrictestMatches(queryString).then((data) => {
       console.log(data);
       setSearchResults(data);
       const [hasImage, noImage] = checkArrayForImage(data);

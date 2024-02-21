@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// const url = `https://shades-challenge.vercel.app`;
 // const url = 'http://localhost:8080';
 
 const url = `https://shades-challenge-server.vercel.app`;

@@ -62,20 +62,23 @@ const getStrictestMatches = async (req, res) => {
     const { queryString } = req.params;
     const keywords = queryString.split(" ").filter(word => !STOPWORDS.includes(word.toLowerCase()));
 
-    const titleFilters = keywords.map(keyword => `title match "${keyword}"`).join(" || ");
-    const labelFilters = keywords.map(keyword => `labels[].value match "${keyword}*"`).join(" || ");
-    const summaryFilters = keywords.map(keyword => `summary match "${keyword}*"`).join(" || ");
+    const titleFilters = keywords.map(keyword => `title match "${keyword}*"`).join(" || ");
+    const labelFilters = keywords.map(keyword => `labels[].value match "${keyword}"`).join(" || ");
+    const labelRelaxedFilters = keywords.map(keyword => `labels[].value match "${keyword}*"`).join(" || ");
+    const summaryFilters = keywords.map(keyword => `summary match "*${keyword}*"`).join(" || ");
 
-    const query = `
-      *[_type == "tile" &&
+    const query =
+      `*[(_type == "tile" &&
       !(summary match "lorem*") &&
       developing == false &&
-      !(_id in path("drafts.*")) &&
-      status == "published" &&
-      !image == null &&
-      (${titleFilters}) &&
-      (${labelFilters}) &&
-      (${summaryFilters})]
+      !(_id in path("drafts.**")) &&
+      status == "published") &&
+      ((
+        (${labelFilters}) && ((${titleFilters}) || (${summaryFilters}))
+      ) ||
+      (
+        (${titleFilters}) && (${labelRelaxedFilters}) && (${summaryFilters})
+      ))]
       {
         _id,
         title,
@@ -84,6 +87,9 @@ const getStrictestMatches = async (req, res) => {
         "image": sharingImage19_5x9Url
       }`;
     const data = await client.fetch(query);
+    console.log(data.map(tile => tile.title));
+    console.log(data.length);
+    console.log(query);
     res.json(data);
   }
   catch (err) {
@@ -92,17 +98,29 @@ const getStrictestMatches = async (req, res) => {
   }
 }
 
-const getStrictMatches = async (req, res) => {
+const getStrictImageMatches = async (req, res) => {
   try {
     const { queryString } = req.params;
+    const keywords = queryString.split(" ").filter(word => !STOPWORDS.includes(word.toLowerCase()));
 
-    const query = `
-      *[_type == "tile" &&
+    const titleFilters = keywords.map(keyword => `title match "${keyword}*"`).join(" || ");
+    const labelFilters = keywords.map(keyword => `labels[].value match "${keyword}"`).join(" || ");
+    const labelRelaxedFilters = keywords.map(keyword => `labels[].value match "${keyword}*"`).join(" || ");
+    const summaryFilters = keywords.map(keyword => `summary match "*${keyword}*"`).join(" || ");
+
+    const query =
+      `*[(_type == "tile" &&
       !(summary match "lorem*") &&
       developing == false &&
-      !(_id in path("drafts.*")) &&
+      !(_id in path("drafts.**")) &&
       status == "published" &&
-      (title match "${queryString}" || (summary match "${queryString}*" && labels[].value match "${queryString}"))]
+      sharingImage19_5x9Url != null) &&
+      ((
+        (${labelFilters}) || ((${titleFilters}) || (${summaryFilters}))
+      ) ||
+      (
+        (${titleFilters}) && (${labelRelaxedFilters}) && (${summaryFilters})
+      ))]
       {
         _id,
         title,
@@ -111,6 +129,9 @@ const getStrictMatches = async (req, res) => {
         "image": sharingImage19_5x9Url
       }`;
     const data = await client.fetch(query);
+    console.log(data.map(tile => tile.title));
+    console.log(data.length);
+    console.log(query);
     res.json(data);
   }
   catch (err) {
@@ -119,13 +140,14 @@ const getStrictMatches = async (req, res) => {
   }
 }
 
-const getByAbstractSearchText = async (req, res) => {
+const getFromQuery = async (req, res) => {
   try {
     const { queryString } = req.params;
     console.log(queryString);
     const keywords = queryString.split(" ").filter(word => !STOPWORDS.includes(word.toLowerCase()));
 
-    const filters = keywords.map(keyword => `(title match "${keyword}"  || labels[].value match "${keyword}")`).join(" || ");
+    const filters = keywords.map(keyword => `(title match "${keyword}*"  
+      || labels[].value match "${keyword}*")`).join(" || ");
 
     const query = `
       *[_type == "tile" &&
@@ -142,13 +164,15 @@ const getByAbstractSearchText = async (req, res) => {
         "image": sharingImage19_5x9Url
       }`;
 
-    const data = await client.fetch(query).then((data) => {
-      res.json(data);
-    });
+    const data = await client.fetch(query);
+    console.log(data.map(tile => tile.title));
+    console.log(data.length);
+    console.log(query);
+    res.json(data);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 }
 
-export { client, getOneTest, getById, getAllTiles, getStrictestMatches, getStrictMatches, getByAbstractSearchText };
+export { client, getOneTest, getById, getAllTiles, getStrictestMatches, getStrictImageMatches, getFromQuery };

@@ -3,9 +3,9 @@ import cors from "cors";
 import {
   getAllTiles,
   getById,
-  getByAbstractSearchText,
+  getFromQuery,
   getOneTest,
-  getStrictMatches,
+  getStrictImageMatches,
   getStrictestMatches,
 } from "./sanityServer.js";
 import { setLiked, getLiked, delLiked, getAllLiked } from "./vercelServer.js";
@@ -30,13 +30,8 @@ app.get("/test", getOneTest);
 app.get("/all", getAllTiles);
 
 // routes for querying Sanity
-app.get("/search/:queryString", getByAbstractSearchText);
-// app.get("/search/exact/title/:queryString", getWholeTitleMatches);
-// app.get("/search/title/:queryString", getPartialTitleMatches);
-// app.get("/search/exact/label/:queryString", getWholeLabelMatches);
-// app.get("/search/label/:queryString", getPartialLabelMatches);
-// app.get("/search/strict/:queryString", getWholeTitleMatches);
-app.get("/search/strict/:queryString", getStrictMatches);
+app.get("/search/:queryString", getFromQuery);
+app.get("/search/strict/:queryString", getStrictImageMatches);
 app.get("/search/strictest/:queryString", getStrictestMatches);
 
 // routes for vercel KV store updates
