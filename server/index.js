@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { getAllTiles, getById, getBySearchTerm } from "./sanity.js";
-import { setLike, getLike } from "./vercel.js";
+import { getAllTiles, getById, getBySearchTerm } from "./sanityServer.js";
+import { setLike, getLike } from "./vercelServer.js";
 
 const server_port = 8080;
 const server_host = "localhost";
