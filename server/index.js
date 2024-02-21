@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { getAllTiles, getById, getBySearchTerm, getOneTest } from "./sanityServer.js";
+import { getAllTiles, getById, getBySearchTerm, getByAbstractSearchTerm, getOneTest } from "./sanityServer.js";
 import { setLiked, getLiked, delLiked, getAllLiked } from "./vercelServer.js";
 
 const server_port = 8080;
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 app.get("/test", getOneTest);
 app.get("/count", getAllTiles);
 app.get("/id/:id", getById);
-app.get("/search/:searchText", getBySearchTerm);
+app.get("/search/:searchText", getByAbstractSearchTerm);
 app.get("/get/:id", getLiked);
 app.put("/set/:id", setLiked);
 app.delete("/del/:id", delLiked);
