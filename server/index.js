@@ -37,7 +37,7 @@ app.get("/search/:queryString", getByAbstractSearchText);
 // app.get("/search/label/:queryString", getPartialLabelMatches);
 // app.get("/search/strict/:queryString", getWholeTitleMatches);
 app.get("/search/strict/:queryString", getStrictMatches);
-app.get("search/strictest/:queryString", getStrictestMatches);
+app.get("/search/strictest/:queryString", getStrictestMatches);
 
 // routes for vercel KV store updates
 app.get("/get/:id", getLiked);
