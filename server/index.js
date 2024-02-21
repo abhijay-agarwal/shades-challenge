@@ -5,10 +5,7 @@ import {
   getById,
   getByAbstractSearchText,
   getOneTest,
-  getPartialTitleMatches,
-  getWholeTitleMatches,
-  getPartialLabelMatches,
-  getWholeLabelMatches
+  getStrictMatches,
 } from "./sanityServer.js";
 import { setLiked, getLiked, delLiked, getAllLiked } from "./vercelServer.js";
 
@@ -33,11 +30,12 @@ app.get("/all", getAllTiles);
 
 // routes for querying Sanity
 app.get("/search/:queryString", getByAbstractSearchText);
-app.get("/search/exact/title/:queryString", getWholeTitleMatches);
-app.get("/search/title/:queryString", getPartialTitleMatches);
-app.get("/search/exact/label/:queryString", getWholeLabelMatches);
-app.get("/search/label/:queryString", getPartialLabelMatches);
-app.get("/search/strict/:queryString", getWholeTitleMatches);
+// app.get("/search/exact/title/:queryString", getWholeTitleMatches);
+// app.get("/search/title/:queryString", getPartialTitleMatches);
+// app.get("/search/exact/label/:queryString", getWholeLabelMatches);
+// app.get("/search/label/:queryString", getPartialLabelMatches);
+// app.get("/search/strict/:queryString", getWholeTitleMatches);
+app.get("/search/strict/:queryString", getStrictMatches);
 
 // routes for vercel KV store updates
 app.get("/get/:id", getLiked);

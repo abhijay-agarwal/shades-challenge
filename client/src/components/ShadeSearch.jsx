@@ -1,6 +1,6 @@
 import Shade from "./Shade";
 import React, { useEffect, useState } from "react";
-import { getByAbstractSearchText } from "../utils/sanityClient";
+import { getByAbstractSearchText, getStrictMatches } from "../utils/sanityClient";
 import { checkArrayForImage } from "../utils/helpers";
 import { Flex, Text, TextInput, ScrollArea, Title, Paper, Divider, Stack } from "@mantine/core";
 import { useViewportSize } from '@mantine/hooks';
@@ -40,7 +40,7 @@ function ShadeSearch() {
   const useHeight2 = height * 0.65;
 
   const handleSearch = () => {
-    getByAbstractSearchText(queryString).then((data) => {
+    getStrictMatches(queryString).then((data) => {
       console.log(data);
       setSearchResults(data);
       const [hasImage, noImage] = checkArrayForImage(data);

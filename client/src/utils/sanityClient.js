@@ -26,12 +26,12 @@ const getById = async (id) => {
   }
 }
 
-const getByTitleText = async (searchTerm) => {
-  if (searchTerm === "") {
+const getByTitleText = async (queryString) => {
+  if (queryString === "") {
     return (["default"]);
   }
   try {
-    const res = await axios.get(`${url}/title/${searchTerm}`);
+    const res = await axios.get(`${url}/title/${queryString}`);
     const { data } = res;
     if (data.length === 0) {
       return ([]);
@@ -43,12 +43,12 @@ const getByTitleText = async (searchTerm) => {
   }
 }
 
-const getByAbstractSearchText = async (searchTerm) => {
-  if (searchTerm === "") {
+const getStrictMatches = async (queryString) => {
+  if (queryString === "") {
     return (["default"]);
   }
   try {
-    const res = await axios.get(`${url}/search/${searchTerm}`);
+    const res = await axios.get(`${url}/search/strict/${queryString}`);
     const { data } = res;
     if (data.length === 0) {
       return ([]);
@@ -60,4 +60,21 @@ const getByAbstractSearchText = async (searchTerm) => {
   }
 }
 
-export { getOneTest, getById, getByTitleText, getByAbstractSearchText };
+const getByAbstractSearchText = async (queryString) => {
+  if (queryString === "") {
+    return (["default"]);
+  }
+  try {
+    const res = await axios.get(`${url}/search/${queryString}`);
+    const { data } = res;
+    if (data.length === 0) {
+      return ([]);
+    } else {
+      return data;
+    }
+  } catch (err) {
+    return ([]);
+  }
+}
+
+export { getOneTest, getById, getByTitleText, getStrictMatches, getByAbstractSearchText };
