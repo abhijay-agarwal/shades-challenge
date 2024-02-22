@@ -25,6 +25,9 @@ function Shade({ id, showLiked }) {
         setImage(data.image);
       });
     }
+    getLike(id).then((data) => {
+      data ? setLikedState(true) : setLikedState(false);
+    });
   }, [id]);
 
   const handleSwitch = async (e) => {
