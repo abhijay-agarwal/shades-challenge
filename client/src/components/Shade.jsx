@@ -26,7 +26,11 @@ function Shade({ id, showLiked }) {
       });
     }
     getLike(id).then((data) => {
-      data ? setLikedState(true) : setLikedState(false);
+      if (data.data === 1) {
+        setLikedState(true);
+      } else {
+        setLikedState(false);
+      }
     });
   }, [id]);
 
